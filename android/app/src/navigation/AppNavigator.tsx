@@ -40,24 +40,24 @@ const AppNavigator = () => {
 
 
     return (
-        // <NavigationContainer>
-        //     {isFirstLaunch ? (
-        //         <OnboardingNavigator />
-        //     ) : isLoggedIn ? (
-        //         <TabNavigator />
-        //     ) : (
-        //         <AuthNavigator />
-        //     )}
-
-        // </NavigationContainer>
-
-
-         <NavigationContainer>
-           
+        <NavigationContainer>
+            {isFirstLaunch ? (
                 <OnboardingNavigator />
-          
+            ) : isLoggedIn ? (
+                <TabNavigator />
+            ) : (
+                <AuthNavigator />
+            )}
 
         </NavigationContainer>
+
+
+        //  <NavigationContainer>
+           
+        //         <OnboardingNavigator />
+          
+
+        // </NavigationContainer>
     );
 };
 

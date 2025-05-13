@@ -5,7 +5,7 @@ import { useTheme } from '../../contex/ThemeContex';
 interface ButtonProps {
     title: string;
     onPress: () => void;
-    type?: 'primary' | 'secondary' | 'outline' | 'text';
+    type?: 'primary' | 'secondary' | 'outline' | 'text' | 'custom';
     size?: 'small' | 'medium' | 'large';
     disabled?: boolean;
     loading?: boolean;
@@ -50,6 +50,11 @@ const Button: React.FC<ButtonProps> = ({
                     backgroundColor: 'transparent',
                     borderColor: 'transparent',
                 };
+            case 'custom':
+                return {
+                    backgroundColor: disabled ? colors.border : colors.custom,
+                    borderColor: disabled ? colors.border : colors.custom,
+                };
             default:
                 return {
                     backgroundColor: disabled ? colors.border : colors.primary,
@@ -89,12 +94,14 @@ const Button: React.FC<ButtonProps> = ({
 
         switch (type) {
             case 'primary':
-                
+
             case 'secondary':
                 return '#FFFFFF';
             case 'outline':
             case 'text':
                 return colors.primary;
+            case 'custom':
+                return 'black';
             default:
                 return '#FFFFFF';
         }
@@ -154,7 +161,7 @@ export default Button
 
 const styles = StyleSheet.create({
     button: {
-        borderRadius: 8,
+        borderRadius: 24,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',

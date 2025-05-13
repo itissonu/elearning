@@ -14,6 +14,7 @@ interface ThemeColors {
   notification: string;
   error: string;
   success: string;
+  custom: string;
 }
 
 interface ThemeContextData {
@@ -34,18 +35,20 @@ const lightColors: ThemeColors = {
   notification: '#EF4444',
   error: '#DC2626',
   success: '#10B981',
+  custom: '#877DFC',
 };
 
 const darkColors: ThemeColors = {
-  primary: 'rgba(26, 6, 6, 0.84)',
+  primary: 'rgba(8, 5, 5, 0.53)',
   secondary: '#6D7AFF',
   background: '#121212',
   card: '#242424',
-  text: '#F9FAFB',
+  text: 'white',
   border: '#374151',
   notification: '#EF4444',
   error: '#DC2626',
   success: '#10B981',
+  custom: '#E2F659',
 };
 
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);

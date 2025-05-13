@@ -13,7 +13,6 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../../contex/ThemeContex';
 
-
 interface InputProps extends TextInputProps {
   label?: string;
   error?: string;
@@ -55,7 +54,7 @@ const Input: React.FC<InputProps> = ({
         <Text
           style={[
             styles.label,
-            { color: colors.text },
+            { color: colors.text, paddingLeft: 6 },
             labelStyle,
           ]}
         >
@@ -66,11 +65,12 @@ const Input: React.FC<InputProps> = ({
         style={[
           styles.inputContainer,
           {
-            borderColor: error 
-              ? colors.error 
-              : isFocused 
-                ? colors.primary 
-                : colors.border,
+            borderRadius: 20,
+            borderColor: error
+              ? colors.error
+              : isFocused
+              ? colors.success
+              : colors.border,
             backgroundColor: isDark ? colors.card : '#F3F4F6',
           },
         ]}
@@ -93,7 +93,7 @@ const Input: React.FC<InputProps> = ({
             },
             inputStyle,
           ]}
-          placeholderTextColor={colors.text + '60'}
+          placeholderTextColor={isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)'}
           secureTextEntry={showPasswordToggle ? !passwordVisible : secureTextEntry}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -140,6 +140,7 @@ const Input: React.FC<InputProps> = ({
 const styles = StyleSheet.create({
   container: {
     marginBottom: 16,
+    borderRadius: 34,
   },
   label: {
     marginBottom: 8,
@@ -157,8 +158,9 @@ const styles = StyleSheet.create({
   },
   leftIcon: {
     position: 'absolute',
-    left: 12,
+    left: 14,
     top: 14,
+    color: 'rgba(106, 14, 14, 0.6)',
   },
   rightIcon: {
     position: 'absolute',
@@ -170,4 +172,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
 export default Input;

@@ -1,18 +1,65 @@
-import React from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
+import React from 'react';
+import { SafeAreaView, Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import Button from '../components/reusable/Button';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+
+ type AuthStackParamList = {
+  GetStarted: undefined;
+  Login: undefined;
+  Register: undefined;
+  ForgotPassword: undefined;
+};
 
 const GetStartedScreen = () => {
+
+     const navigation = useNavigation<NavigationProp<AuthStackParamList>>()
     return (
-    
+        <SafeAreaView style={styles.container}>
+            <Text style={styles.title}>
+                Get support{'\n'}
+                in your{'\n'}
+                new career
+            </Text>
 
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 24, fontWeight: 'bold' ,color:'blue'}}>Welcome to E-learning</Text>
-                <Text>Get Strted. now </Text>
-                <Text>Welcome to the E-learning App!</Text>
-                <Text>Let's get started with your learning journey.</Text>
-            </View>
- 
-    )
-}
+            <Image
+                source={require('../assets/entry.png')}
+                style={styles.image}
+                resizeMode="contain"
+            />
+            <TouchableOpacity>
+                <Button 
+                    title="Next" 
+                    onPress={() => navigation.navigate('Login')}
+                />
+                <Text style={styles.nextText}>Next</Text>
+            </TouchableOpacity>
+        </SafeAreaView>
+    );
+};
 
-export default GetStartedScreen
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#E2F659',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    title: {
+        fontSize: 40,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 40,
+    },
+    image: {
+        width: 250,
+        height: 250,
+        marginBottom: 50,
+    },
+    nextText: {
+        fontSize: 18,
+        textDecorationLine: 'underline',
+    },
+});
+
+export default GetStartedScreen;

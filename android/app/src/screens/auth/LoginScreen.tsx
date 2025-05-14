@@ -7,6 +7,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Button from '../../components/reusable/Button';
 import { useTheme } from '../../contex/ThemeContex';
 import { Icon } from 'react-native-vector-icons/Icon';
+import { useAuth } from '../../contex/AuthContex';
 
 const LoginScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
@@ -15,7 +16,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { colors, isDark } = useTheme();
-
+  const { login } = useAuth();
   const handleLogin = () => {
     if (!email || !password) {
       setError('Email and password are required');
@@ -24,6 +25,7 @@ const LoginScreen = () => {
 
     setError('');
     console.log('Login clicked:', { email, password });
+    login();
 
     // Navigate to your main app or dashboard after login
     // navigation.replace('Main'); // if you have a main tab navigator
@@ -69,7 +71,7 @@ const LoginScreen = () => {
         </Text>
       </Text>
 
-      <Text style={[styles.register, { color: colors.text ,position: 'absolute', bottom: 20, left: 0, right: 0}]}>
+      <Text style={[styles.register, { color: colors.text, position: 'absolute', bottom: 20, left: 0, right: 0 }]}>
         Don't have an account?{' '}
         <Text style={[styles.link, { color: '#7774f3' }]} onPress={() => navigation.navigate('Register')}>
           Register

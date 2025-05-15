@@ -6,61 +6,63 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from '../screens/home/HomeScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SearchScreen from '../screens/SearchScreen';
+import MyCoursesScreen from '../screens/course/MyCourses';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 
-// import HomeScreen from '../screens/HomeScreen';
-// import ExploreScreen from '../screens/ExploreScreen';
-// import CourseDetailScreen from '../screens/CourseDetailScreen';
-// import VideoPlayerScreen from '../screens/VideoPlayerScreen';
-// import ProfileScreen from '../screens/ProfileScreen';
-// import EditProfileScreen from '../screens/EditProfileScreen';
-// import SettingsScreen from '../screens/SettingsScreen';
+
 
 const Tab = createBottomTabNavigator();
-const HomeStack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
-// Home Stack
+// ----- Home Stack -----
 const HomeStackNavigator = () => (
-  <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-    <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-    {/* <HomeStack.Screen name="CourseDetail" component={CourseDetailScreen} />
-    <HomeStack.Screen name="VideoPlayer" component={VideoPlayerScreen} /> */}
-  </HomeStack.Navigator>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="HomeScreen" component={HomeScreen} />
+ 
+  </Stack.Navigator>
 );
 
-// Explore Stack
-// const ExploreStackNavigator = () => (
-//   <ExploreStack.Navigator screenOptions={{ headerShown: false }}>
-//     <ExploreStack.Screen name="ExploreScreen" component={ExploreScreen} />
-//     <ExploreStack.Screen name="CourseDetail" component={CourseDetailScreen} />
-//     <ExploreStack.Screen name="VideoPlayer" component={VideoPlayerScreen} />
-//   </ExploreStack.Navigator>
-// );
+// ----- Search Stack -----
+const SearchStackNavigator = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="SearchScreen" component={SearchScreen} />
+  </Stack.Navigator>
+);
 
-// Profile Stack
-// const ProfileStackNavigator = () => (
-//   <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
-//     <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
-//     <ProfileStack.Screen name="EditProfile" component={EditProfileScreen} />
-//     <ProfileStack.Screen name="Settings" component={SettingsScreen} />
-//   </ProfileStack.Navigator>
-// );
+// ----- My Courses Stack -----
+const MyCoursesStackNavigator = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="MyCoursesScreen" component={MyCoursesScreen} />
+  </Stack.Navigator>
+);
+
+// ----- Profile Stack -----
+const ProfileStackNavigator = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+  </Stack.Navigator>
+);
+
 
 const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }: { route: any }) => ({
         headerShown: false,
-        tabBarIcon: ({ color, size }: { color: string; size: number }) => {
+        tabBarIcon: ({ color, size }) => {
           let iconName = 'home';
-          if (route.name === 'Explore') iconName = 'explore';
+          if (route.name === 'Search') iconName = 'search';
+          else if (route.name === 'MyCourses') iconName = 'play-circle-outline';
           else if (route.name === 'Profile') iconName = 'person';
           return <Icon name={iconName} size={size} color={color} />;
         },
       })}
     >
       <Tab.Screen name="Home" component={HomeStackNavigator} />
-      {/* <Tab.Screen name="Explore" component={ExploreStackNavigator} />
-      <Tab.Screen name="Profile" component={ProfileStackNavigator} /> */}
+      <Tab.Screen name="Search" component={SearchStackNavigator} />
+      <Tab.Screen name="MyCourses" component={MyCoursesStackNavigator} />
+      <Tab.Screen name="Profile" component={ProfileStackNavigator} />
     </Tab.Navigator>
   );
 };

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, FlatList, TextInput } from 'react-native';
 import Card from '../../components/reusable/Card';
-import { Icon } from 'react-native-vector-icons/Icon';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Input from '../../components/reusable/Input';
 import Button from '../../components/reusable/Button';
 import { useTheme } from '../../context/contex/ThemeContex';
@@ -47,7 +47,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
       price: 899,
     },
   ];
-  const renderItem = ({ item }: { item: any }) => (
+ const renderItem = ({ item }: { item: any }) => (
+  <TouchableOpacity onPress={() => navigation.navigate('CourseDetail', { course: item })}>
     <View style={styles.cardCourse}>
       <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.info}>
@@ -56,12 +57,10 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
         <View style={styles.metaRow}>
           <View style={styles.rating}>
-
             <Text style={styles.ratingText}>⭐ {item.rating} ({item.reviews})</Text>
           </View>
 
           <View style={styles.users}>
-
             <Text style={styles.userText}>{item.enrolled}+ students</Text>
           </View>
         </View>
@@ -69,14 +68,16 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
         <Text style={styles.prices}>₹ {item.price}</Text>
       </View>
     </View>
-  );
+  </TouchableOpacity>
+);
+
   const [selectedCategory, setSelectedCategory] = useState('Design');
 
   const { colors, isDark } = useTheme();
   return (
     <ScrollView style={[styles.container, { backgroundColor: isDark ? colors.background : 'white' }]}>
 
-      <View style={[styles.header, { borderBottomLeftRadius: 40, borderBottomRightRadius: 40, paddingBottom: 40 }]}>
+      <View style={[styles.header, { borderBottomLeftRadius: 40, borderBottomRightRadius: 40, paddingBottom: 40 ,backgroundColor: isDark ? '#363d36' : 'black'}]}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -86,15 +87,26 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
               }}
               style={styles.profileImage}
             />
-            <Text style={[styles.welcome, { color: colors.text, marginLeft: 10 }]}>Hello, Student 👋</Text>
+            <Text style={[styles.welcome, { color: 'white', marginLeft: 10 }]}>Hello, Student 👋</Text>
+            <View style={{
+              width: 30,
+              height: 30,
+              backgroundColor: 'gray',
+              borderRadius: 5,
+              borderBlockColor: 'white',
+              justifyContent: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              shadowColor: '#000',
+              shadowOpacity: 0.1,
+              shadowOffset: { width: 0, height: 4 },
+              shadowRadius: 6,
+            }}>
+              <Icon name="notifications" size={20} color={colors.text} />
+            </View>
           </View>
 
-          <View style={{
-            width: 15,
-            height: 15,
-            backgroundColor: '#ff4d4d',
-            borderRadius: 7.5,
-          }} />
+
         </View>
 
         {/* Search Input half inside, half outside */}
@@ -124,13 +136,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
       <View style={styles.headerCard}>
         <Text style={styles.statsText}>25+ Lecture     45 Enrolled     4.8 Rating</Text>
         <Text style={styles.title}>Ui/Ux Design{"\n"}Live class</Text>
-        <TouchableOpacity
-          style={styles.bookNow}
-          onPress={() => navigation.navigate('ExampleScreen')}
-        >
-          <Text style={styles.bookNowText}>Enter to Example Screen</Text>
-        </TouchableOpacity>
-          {/* <Icon name="arrow-forward" size={18} color="black" /> */}
+
+        <Icon name="arrow-forward" size={18} color="black" />
         <View style={styles.instructorRow}>
           <Image source={{ uri: 'https://i.pravatar.cc/50?img=1' }} style={styles.avatar} />
           <Text style={styles.instructor}>Alfie Mason</Text>
@@ -139,7 +146,8 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           <Text style={styles.seats}>30{"\n"}Seat Available</Text>
           <TouchableOpacity style={styles.bookNow}>
             <Text style={styles.bookNowText}>Book Now</Text>
-            {/* <Icon name="arrow-forward" size={18} color="black" /> */}
+
+            <Icon name="arrow-forward" size={18} color="black" />
           </TouchableOpacity>
         </View>
       </View>
@@ -162,7 +170,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             >
               <Text
                 style={[
-                  styles.chipText,
+                  styles.chipText,{color: isDark ? 'white' : 'black'},
                   selectedCategory === item.name && styles.chipTextActive,
                 ]}
               >
@@ -183,7 +191,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           >
             <View style={styles.carde}>
               <Text style={styles.level}>Beginner</Text>
-              <Text style={styles.price}>$90</Text>
+              <Text style={[styles.price,{color:'white'}]}>$90</Text>
               <Text style={styles.course}>web design</Text>
               <View style={styles.detailsRow}>
                 {/* <Icon name="checkmark-circle-outline" color="#ccc" size={16} /> */}
@@ -497,23 +505,22 @@ const styles = StyleSheet.create({
   cardCourse: {
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: 'rgb(14, 13, 13)',
+    backgroundColor: '#1f1f1f',
     borderRadius: 12,
     overflow: 'hidden',
-    marginVertical: 10,
-    marginHorizontal: 16,
+
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
     elevation: 4,
-
+    marginBottom: 12,
     padding: 12,
   },
   image: {
     padding: 12,
     resizeMode: 'cover',
-    width: 260,
+    width: '100%',
     height: 200,
     borderRadius: 12,
   },

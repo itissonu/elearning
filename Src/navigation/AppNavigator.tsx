@@ -9,6 +9,7 @@ import OnboardingNavigator from './OnboardingNavigator';
 import AuthNavigator from './AuthNavigator';
 import TabNavigator from './Tabnavigator';
 import ExampleScreen from '../screens/ExampleScreen';
+import CourseDetailsScreen from '../screens/course/CouseDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const LoggedInNavigator = () => (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="HomeTabs" component={TabNavigator} />
         <Stack.Screen name="ExampleScreen" component={ExampleScreen} />
+        <Stack.Screen name="CourseDetail" component={CourseDetailsScreen} />
     </Stack.Navigator>
 );
 

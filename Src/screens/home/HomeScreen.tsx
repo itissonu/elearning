@@ -47,29 +47,29 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
       price: 899,
     },
   ];
- const renderItem = ({ item }: { item: any }) => (
-  <TouchableOpacity onPress={() => navigation.navigate('CourseDetail', { course: item })}>
-    <View style={styles.cardCourse}>
-      <Image source={{ uri: item.image }} style={styles.image} />
-      <View style={styles.info}>
-        <Text style={styles.name} numberOfLines={2}>{item.name}</Text>
-        <Text style={styles.author}>By {item.author}</Text>
+  const renderItem = ({ item }: { item: any }) => (
+    <TouchableOpacity onPress={() => navigation.navigate('CourseDetail', { course: item })}>
+      <View style={styles.cardCourse}>
+        <Image source={{ uri: item.image }} style={styles.image} />
+        <View style={styles.info}>
+          <Text style={styles.name} numberOfLines={2}>{item.name}</Text>
+          <Text style={styles.author}>By {item.author}</Text>
 
-        <View style={styles.metaRow}>
-          <View style={styles.rating}>
-            <Text style={styles.ratingText}>⭐ {item.rating} ({item.reviews})</Text>
+          <View style={styles.metaRow}>
+            <View style={styles.rating}>
+              <Text style={styles.ratingText}>⭐ {item.rating} ({item.reviews})</Text>
+            </View>
+
+            <View style={styles.users}>
+              <Text style={styles.userText}>{item.enrolled}+ students</Text>
+            </View>
           </View>
 
-          <View style={styles.users}>
-            <Text style={styles.userText}>{item.enrolled}+ students</Text>
-          </View>
+          <Text style={styles.prices}>₹ {item.price}</Text>
         </View>
-
-        <Text style={styles.prices}>₹ {item.price}</Text>
       </View>
-    </View>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
 
   const [selectedCategory, setSelectedCategory] = useState('Design');
 
@@ -77,7 +77,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   return (
     <ScrollView style={[styles.container, { backgroundColor: isDark ? colors.background : 'white' }]}>
 
-      <View style={[styles.header, { borderBottomLeftRadius: 40, borderBottomRightRadius: 40, paddingBottom: 40 ,backgroundColor: isDark ? '#363d36' : 'black'}]}>
+      <View style={[styles.header, { borderBottomLeftRadius: 40, borderBottomRightRadius: 40, paddingBottom: 40, backgroundColor: isDark ? '#363d36' : 'black' }]}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
 
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -151,6 +151,12 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           </TouchableOpacity>
         </View>
       </View>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Button
+          title="Go to Video Call"
+          onPress={() => navigation.navigate('VideoCall')}
+        />
+      </View>
 
       <View style={{ paddingHorizontal: 20 }}>
         {/* Category */}
@@ -170,7 +176,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             >
               <Text
                 style={[
-                  styles.chipText,{color: isDark ? 'white' : 'black'},
+                  styles.chipText, { color: isDark ? 'white' : 'black' },
                   selectedCategory === item.name && styles.chipTextActive,
                 ]}
               >
@@ -191,7 +197,7 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           >
             <View style={styles.carde}>
               <Text style={styles.level}>Beginner</Text>
-              <Text style={[styles.price,{color:'white'}]}>$90</Text>
+              <Text style={[styles.price, { color: 'white' }]}>$90</Text>
               <Text style={styles.course}>web design</Text>
               <View style={styles.detailsRow}>
                 {/* <Icon name="checkmark-circle-outline" color="#ccc" size={16} /> */}

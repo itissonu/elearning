@@ -10,6 +10,8 @@ import AuthNavigator from './AuthNavigator';
 import TabNavigator from './Tabnavigator';
 import ExampleScreen from '../screens/ExampleScreen';
 import CourseDetailsScreen from '../screens/course/CouseDetails';
+import VideoCallScreen from '../screens/VideoCall';
+import JoinRoomScreenMain from '../screens/JoinRoommainScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +20,7 @@ const LoggedInNavigator = () => (
         <Stack.Screen name="HomeTabs" component={TabNavigator} />
         <Stack.Screen name="ExampleScreen" component={ExampleScreen} />
         <Stack.Screen name="CourseDetail" component={CourseDetailsScreen} />
+         <Stack.Screen name="VideoCall" component={JoinRoomScreenMain} />
     </Stack.Navigator>
 );
 

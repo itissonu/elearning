@@ -22,7 +22,7 @@ const JoinRoomScreen = () => {
   };
 
   if (inCall) {
-    return <VideoCallScreen roomId={roomId} onEndCall={handleEndCall} />;
+    return <VideoCallScreen roomId={roomId} onEndCall={handleEndCall} serverUrl = 'http://192.168.29.80:3000' />;
   }
 
   return (
